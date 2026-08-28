@@ -1,0 +1,286 @@
+{
+  "function": "Quality",
+  "plan_level": "L2",
+  "l3_enabled": false,
+  "l3_reason": "L3 yalnizca R&D fonksiyonu icin kullanilabilir.",
+  "version": "1.0",
+  "status": "DRAFT",
+  "inherited_from_l1": [
+    "project_id",
+    "project_code",
+    "project_name",
+    "customer",
+    "segment",
+    "project_type",
+    "project_difficulty",
+    "pm",
+    "site",
+    "created_by",
+    "created_at"
+  ],
+  "function_owned_fields": [
+    "plan_item_id",
+    "plan_item_name",
+    "responsible_role",
+    "start_rule",
+    "input",
+    "output",
+    "due_rule",
+    "predecessor",
+    "successor",
+    "conditional",
+    "task_followup_mode",
+    "standard_workload_reference"
+  ],
+  "plan_items": [
+    {
+      "plan_item_id": "QUA-L2-001",
+      "seq": 1,
+      "plan_item_name": "Control Plan (Proto / Pre-launch / Production)",
+      "purpose": "Urun ve proses kontrol gerekliliklerinin faz bazinda tanimlanmasi ve onaylanmasi.",
+      "responsible_role": "Quality Engineer",
+      "start_rule": {
+        "type": "L1_MILESTONE",
+        "reference": "DESIGN_PROTO_GATE",
+        "manual_date_entry": false
+      },
+      "input": [
+        {
+          "name": "Customer CSR & quality standards",
+          "source": "CUSTOMER",
+          "type": "PRIMARY"
+        },
+        {
+          "name": "PFMEA / process flow diagram",
+          "source": "PROCESS",
+          "type": "EXTERNAL_DEPENDENCY"
+        }
+      ],
+      "output": {
+        "name": "Approved Control Plan",
+        "measurable": true,
+        "version_controlled": true,
+        "approval_required": true
+      },
+      "due_rule": {
+        "type": "L1_MILESTONE",
+        "reference": "DESIGN_PROTO_GATE",
+        "offset_days": 0,
+        "manual_date_entry": false
+      },
+      "predecessor": [],
+      "successor": ["QUA-L2-003"],
+      "conditional": false,
+      "task_followup_mode": "USER_DECIDES",
+      "standard_workload_reference": null,
+      "standard_workload_status": "WORKLOAD_STANDARD_GAP"
+    },
+    {
+      "plan_item_id": "QUA-L2-002",
+      "seq": 2,
+      "plan_item_name": "Gage / Olcum Ekipmani Planlama",
+      "purpose": "Gerekli olcum ekipmani ve fiksturlerin belirlenmesi, temini ve kalibrasyon durumunun hazir hale getirilmesi.",
+      "responsible_role": "Quality Engineer (Metrology)",
+      "start_rule": {
+        "type": "EXTERNAL_FUNCTION_OUTPUT",
+        "reference": "RND_DRAWING_RELEASE",
+        "manual_date_entry": false
+      },
+      "input": [
+        {
+          "name": "Released drawing & special characteristics",
+          "source": "RND",
+          "type": "EXTERNAL_DEPENDENCY"
+        }
+      ],
+      "output": {
+        "name": "Gage plan + calibrated measurement equipment available",
+        "measurable": true,
+        "version_controlled": false,
+        "approval_required": false
+      },
+      "due_rule": {
+        "type": "L1_MILESTONE_MINUS_LEAD_TIME",
+        "reference": "PPAP_SUBMISSION",
+        "lead_time_source": "GAGE_STANDARD_LEAD_TIME",
+        "lead_time_value": null,
+        "note": "Uzun temin suresi nedeniyle backward planning uygulanir. Lead time degeri OQ-05 ile netlesecek.",
+        "manual_date_entry": false
+      },
+      "predecessor": ["RND_DRAWING_RELEASE"],
+      "successor": ["QUA-L2-003"],
+      "conditional": true,
+      "condition": {
+        "expression": "New Measurement Equipment Required = Yes",
+        "source_field": "new_measurement_equipment_required",
+        "source_level": "L1_OR_PROJECT_DATA",
+        "if_false": "PLAN_ITEM_INACTIVE"
+      },
+      "task_followup_mode": "USER_DECIDES",
+      "standard_workload_reference": null,
+      "standard_workload_status": "WORKLOAD_STANDARD_GAP"
+    },
+    {
+      "plan_item_id": "QUA-L2-003",
+      "seq": 3,
+      "plan_item_name": "PPAP Dosyasi Hazirlama",
+      "purpose": "PPAP elemanlarinin toplanmasi ve musteriye sunulabilir tek dosya olarak derlenmesi.",
+      "responsible_role": "Quality Engineer",
+      "start_rule": {
+        "type": "PREDECESSOR_COMPLETE",
+        "expression": "QUA-L2-001 = Approved AND (QUA-L2-002 = Complete OR QUA-L2-002 = Inactive)",
+        "manual_date_entry": false
+      },
+      "input": [
+        {
+          "name": "Approved Control Plan",
+          "source": "QUA-L2-001",
+          "type": "INTERNAL"
+        },
+        {
+          "name": "Measurement / dimensional results",
+          "source": "QUA-L2-002",
+          "type": "INTERNAL"
+        },
+        {
+          "name": "Material & performance test reports",
+          "source": "QUALITY",
+          "type": "INTERNAL"
+        },
+        {
+          "name": "Supplier PPAP status",
+          "source": "PURCHASING",
+          "type": "EXTERNAL_DEPENDENCY"
+        }
+      ],
+      "output": {
+        "name": "Compiled PPAP file",
+        "measurable": true,
+        "version_controlled": true,
+        "approval_required": true
+      },
+      "due_rule": {
+        "type": "L1_MILESTONE",
+        "reference": "PPAP_SUBMISSION",
+        "offset_days": 0,
+        "manual_date_entry": false
+      },
+      "predecessor": ["QUA-L2-001", "QUA-L2-002"],
+      "successor": ["QUA-L2-004"],
+      "conditional": true,
+      "condition": {
+        "expression": "Customer PPAP Required = Yes",
+        "source_field": "customer_ppap_required",
+        "source_level": "L1_OR_PROJECT_DATA",
+        "if_false": "PLAN_ITEM_INACTIVE"
+      },
+      "task_followup_mode": "USER_DECIDES",
+      "standard_workload_reference": null,
+      "standard_workload_status": "WORKLOAD_STANDARD_GAP"
+    },
+    {
+      "plan_item_id": "QUA-L2-004",
+      "seq": 4,
+      "plan_item_name": "PPAP Musteri Sunumu & Onay Takibi",
+      "purpose": "PPAP dosyasinin musteriye sunulmasi ve PSW onayinin alinmasi; interim/red donuslerinin yonetilmesi.",
+      "responsible_role": "Quality Engineer",
+      "approver": "Quality Manager",
+      "start_rule": {
+        "type": "PREDECESSOR_COMPLETE",
+        "expression": "QUA-L2-003 = Complete (file submitted to customer)",
+        "manual_date_entry": false
+      },
+      "input": [
+        {
+          "name": "Compiled PPAP file",
+          "source": "QUA-L2-003",
+          "type": "INTERNAL"
+        }
+      ],
+      "output": {
+        "name": "Customer PSW approval (or interim / rejection decision)",
+        "measurable": true,
+        "version_controlled": true,
+        "approval_required": true
+      },
+      "due_rule": {
+        "type": "L1_MILESTONE",
+        "reference": "PPAP_APPROVAL",
+        "offset_days": 0,
+        "manual_date_entry": false
+      },
+      "predecessor": ["QUA-L2-003"],
+      "successor": ["QUA-L2-005"],
+      "conditional": true,
+      "condition": {
+        "expression": "Customer PPAP Required = Yes",
+        "source_field": "customer_ppap_required",
+        "source_level": "L1_OR_PROJECT_DATA",
+        "if_false": "PLAN_ITEM_INACTIVE"
+      },
+      "task_followup_mode": "EXCEPTION_ONLY",
+      "task_followup_note": "Critical Review onerisi 1: fonksiyonun en buyuk pain point'i oldugu icin gecikme/blokaj durumunda otomatik Follow-Up Task olusur.",
+      "cross_function_handover": "CUSTOMER_AND_PM_L1_GATE",
+      "standard_workload_reference": null,
+      "standard_workload_status": "WORKLOAD_STANDARD_GAP"
+    },
+    {
+      "plan_item_id": "QUA-L2-005",
+      "seq": 5,
+      "plan_item_name": "Seri Uretim Kalitesine Devir",
+      "purpose": "Proje kalitesinden seri uretim kalitesine resmi devir; Quality fonksiyonunun proje kapanisi.",
+      "responsible_role": "Quality Engineer",
+      "receiving_role": "Series Quality",
+      "start_rule": {
+        "type": "CONDITIONAL_PREDECESSOR",
+        "expression": "QUA-L2-004 = PSW Approved OR (Customer PPAP Required = No AND final verification complete)",
+        "note": "Critical Review onerisi 5: PPAP kapsam disi oldugunda zincir kopmaz.",
+        "manual_date_entry": false
+      },
+      "input": [
+        {
+          "name": "PSW approval / final verification record",
+          "source": "QUA-L2-004",
+          "type": "INTERNAL"
+        },
+        {
+          "name": "Production control plan",
+          "source": "QUA-L2-001",
+          "type": "INTERNAL"
+        }
+      ],
+      "output": {
+        "name": "Signed series quality handover record",
+        "measurable": true,
+        "version_controlled": false,
+        "approval_required": false
+      },
+      "due_rule": {
+        "type": "L1_MILESTONE",
+        "reference": "SOP",
+        "offset_days": 0,
+        "manual_date_entry": false
+      },
+      "predecessor": ["QUA-L2-004"],
+      "successor": [],
+      "conditional": false,
+      "task_followup_mode": "USER_DECIDES",
+      "standard_workload_reference": null,
+      "standard_workload_status": "WORKLOAD_STANDARD_GAP"
+    }
+  ],
+  "out_of_scope": [
+    {
+      "topic": "PFMEA / MSA / Gage R&R",
+      "owned_by": "Process",
+      "quality_role": "CONTRIBUTOR",
+      "marker": "EXTERNAL_DEPENDENCY"
+    },
+    {
+      "topic": "Supplier quality (supplier PPAP, incoming quality, supplier audit)",
+      "owned_by": "Purchasing",
+      "quality_role": "CONSUMER",
+      "marker": "EXTERNAL_DEPENDENCY"
+    }
+  ]
+}

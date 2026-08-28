@@ -1,0 +1,68 @@
+{
+  "function": "Quality",
+  "version": "1.0",
+  "note": "Bu dosya mevcut Task Follow-Up status modelini, kart yapisini, global filtrelerini veya lifecycle'ini DEGISTIRMEZ. Yalnizca Quality L2 plan item'larindan hangi durumlarda Task Follow-Up'a aksiyon tasinacagini tanimlar.",
+  "allowed_modes": [
+    "NONE",
+    "ALWAYS_LINK",
+    "EXCEPTION_ONLY",
+    "USER_DECIDES"
+  ],
+  "mappings": [
+    {
+      "plan_item_id": "QUA-L2-001",
+      "plan_item_name": "Control Plan (Proto / Pre-launch / Production)",
+      "mode": "USER_DECIDES",
+      "recommended_trigger": [],
+      "rationale": "Normal ilerledigi surece ayri takip gerektirmez; kullanici gerektiginde task acar."
+    },
+    {
+      "plan_item_id": "QUA-L2-002",
+      "plan_item_name": "Gage / Olcum Ekipmani Planlama",
+      "mode": "USER_DECIDES",
+      "recommended_trigger": [],
+      "rationale": "Temin gecikmesi backward due kurali ile plan uzerinde zaten gorunur olur."
+    },
+    {
+      "plan_item_id": "QUA-L2-003",
+      "plan_item_name": "PPAP Dosyasi Hazirlama",
+      "mode": "USER_DECIDES",
+      "recommended_trigger": [],
+      "rationale": "Dosya derleme ic is; eksik eleman durumunda kullanici task acabilir."
+    },
+    {
+      "plan_item_id": "QUA-L2-004",
+      "plan_item_name": "PPAP Musteri Sunumu & Onay Takibi",
+      "mode": "EXCEPTION_ONLY",
+      "recommended_trigger": [
+        "DELAYED",
+        "BLOCKED"
+      ],
+      "exception_link": [
+        "EXC-Q-01"
+      ],
+      "rationale": "Fonksiyonun en buyuk pain point'i musteri PPAP onay donusudur. Bildirim tek basina aksiyon sahibi yaratmadigi icin, gecikme veya interim/red durumunda otomatik Follow-Up Task olusur. Her projede degil, yalnizca istisna halinde acilir; bu sayede duplicate tracking olusmaz."
+    },
+    {
+      "plan_item_id": "QUA-L2-005",
+      "plan_item_name": "Seri Uretim Kalitesine Devir",
+      "mode": "USER_DECIDES",
+      "recommended_trigger": [],
+      "rationale": "Devir tek seferlik ve L1 SOP milestone'a bagli; ayri takip gerektirmez."
+    }
+  ],
+  "plan_to_task_link_contract": {
+    "project_id": "from L1",
+    "function": "Quality",
+    "plan_level": "L2",
+    "plan_item_id": "QUA-L2-XXX",
+    "l3_type": null,
+    "task_id": "assigned by existing Task Follow-Up layer"
+  },
+  "not_designed_by_function": [
+    "Task status values",
+    "Task card structure",
+    "Global task filters",
+    "Task lifecycle"
+  ]
+}

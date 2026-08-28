@@ -1,0 +1,54 @@
+{
+  "function": "Quality",
+  "version": "1.0",
+  "note": "Bu dosyada difficulty ve saat bulunmaz. Project Difficulty L1 Project Plan'dan gelir; Planned Workload merkezi Standard Workload Engine tarafindan hesaplanir.",
+  "mapping_method": "CENTRAL",
+  "mapping_method_reason": "Standard Workload dosyasi/verisi bu calisma sirasinda erisilebilir degildi; secenek listesi kullaniciya gosterilemedi. Fonksiyon saat tahmini uretmemis, tum satirlar GAP olarak isaretlenmistir.",
+  "mappings": [
+    {
+      "plan_item_id": "QUA-L2-001",
+      "plan_item_name": "Control Plan (Proto / Pre-launch / Production)",
+      "standard_workload_reference": null,
+      "mapping_status": "WORKLOAD_STANDARD_GAP",
+      "reason": "No matching Standard Workload activity identified",
+      "action": "Review centrally before integration"
+    },
+    {
+      "plan_item_id": "QUA-L2-002",
+      "plan_item_name": "Gage / Olcum Ekipmani Planlama",
+      "standard_workload_reference": null,
+      "mapping_status": "WORKLOAD_STANDARD_GAP",
+      "reason": "No matching Standard Workload activity identified",
+      "action": "Review centrally before integration"
+    },
+    {
+      "plan_item_id": "QUA-L2-003",
+      "plan_item_name": "PPAP Dosyasi Hazirlama",
+      "standard_workload_reference": null,
+      "mapping_status": "WORKLOAD_STANDARD_GAP",
+      "reason": "No matching Standard Workload activity identified",
+      "action": "Review centrally before integration"
+    },
+    {
+      "plan_item_id": "QUA-L2-004",
+      "plan_item_name": "PPAP Musteri Sunumu & Onay Takibi",
+      "standard_workload_reference": null,
+      "mapping_status": "WORKLOAD_STANDARD_GAP",
+      "reason": "No matching Standard Workload activity identified",
+      "action": "Review centrally before integration"
+    },
+    {
+      "plan_item_id": "QUA-L2-005",
+      "plan_item_name": "Seri Uretim Kalitesine Devir",
+      "standard_workload_reference": null,
+      "mapping_status": "WORKLOAD_STANDARD_GAP",
+      "reason": "No matching Standard Workload activity identified",
+      "action": "Review centrally before integration"
+    }
+  ],
+  "gap_summary": {
+    "total_plan_items": 5,
+    "confirmed": 0,
+    "gap": 5
+  }
+}
