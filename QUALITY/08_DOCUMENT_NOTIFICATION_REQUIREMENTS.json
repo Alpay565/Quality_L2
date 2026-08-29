@@ -1,0 +1,81 @@
+{
+  "function": "Quality",
+  "version": "1.0",
+  "documents": [
+    {
+      "document_type": "Control Plan",
+      "related_plan_item": "QUA-L2-001",
+      "required_as": "OUTPUT",
+      "approval_required": true,
+      "version_controlled": true
+    },
+    {
+      "document_type": "PPAP File / PSW",
+      "related_plan_item": "QUA-L2-003",
+      "required_as": "OUTPUT",
+      "approval_required": true,
+      "version_controlled": true
+    },
+    {
+      "document_type": "Customer PSW Approval Record",
+      "related_plan_item": "QUA-L2-004",
+      "required_as": "OUTPUT",
+      "approval_required": true,
+      "version_controlled": true
+    },
+    {
+      "document_type": "Gage Plan / Calibration Status",
+      "related_plan_item": "QUA-L2-002",
+      "required_as": "OUTPUT",
+      "approval_required": false,
+      "version_controlled": false
+    },
+    {
+      "document_type": "Series Quality Handover Record",
+      "related_plan_item": "QUA-L2-005",
+      "required_as": "OUTPUT",
+      "approval_required": false,
+      "version_controlled": false
+    },
+    {
+      "document_type": "Customer CSR / Quality Standards",
+      "related_plan_item": "QUA-L2-001",
+      "required_as": "INPUT",
+      "approval_required": false,
+      "version_controlled": false,
+      "note": "Musteriden gelen referans dokuman; Quality tarafindan onaylanmaz."
+    }
+  ],
+  "document_note": "Drive/klasor mimarisi merkezi sistem tarafindan yonetilir. Fonksiyon yalnizca dokuman ihtiyacini, onay ve versiyon gerekliligini belirtmistir.",
+  "notifications": [
+    {
+      "id": "NOT-Q-01",
+      "event": "PPAP_APPROVAL_OVERDUE",
+      "related_plan_item": "QUA-L2-004",
+      "trigger": "Musteriye sunulan PPAP'a beklenen surede PSW onayi gelmezse",
+      "threshold": null,
+      "threshold_open_point": "OQ-06 – esik gun sayisi netlesecek",
+      "recipients": ["Quality Engineer", "Quality Manager", "PM"],
+      "channel": ["Portal", "Email"],
+      "rationale": "Fonksiyonun birincil pain point'i."
+    },
+    {
+      "id": "NOT-Q-02",
+      "event": "DUE_DATE_APPROACHING",
+      "related_plan_item": "QUA-L2-003",
+      "trigger": "L1 PPAP submission milestone yaklastiginda",
+      "recipients": ["Quality Engineer"],
+      "channel": ["Portal"]
+    },
+    {
+      "id": "NOT-Q-03",
+      "event": "DUE_DATE_APPROACHING",
+      "related_plan_item": "QUA-L2-004",
+      "trigger": "L1 PPAP approval milestone yaklastiginda",
+      "recipients": ["Quality Engineer"],
+      "channel": ["Portal"]
+    }
+  ],
+  "notification_scope_note": "Critical Review onerisi 6 uygulanmistir: 'due date yaklasinca' bildirimi tum plan item'lar yerine yalnizca QUA-L2-003 ve QUA-L2-004 icin tanimlandi. QUA-L2-001, QUA-L2-002 ve QUA-L2-005 icin otomatik bildirim yoktur; bunlar weekly review uzerinden takip edilir.",
+  "principle": "Bildirim varsayilan davranis degil, istisnadir."
+}

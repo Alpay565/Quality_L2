@@ -1,0 +1,78 @@
+{
+  "function": "Quality",
+  "version": "1.0",
+  "conditional_rules": [
+    {
+      "plan_item_id": "QUA-L2-002",
+      "plan_item_name": "Gage / Olcum Ekipmani Planlama",
+      "condition": "IF New Measurement Equipment Required = Yes",
+      "source_field": "new_measurement_equipment_required",
+      "evaluation": "AUTOMATIC_IF_AVAILABLE",
+      "source_level": "L1_OR_PROJECT_DATA",
+      "if_true": "Plan item active",
+      "if_false": "Plan item inactive; QUA-L2-003 mevcut gage ile ilerler",
+      "open_point": "Bu alan L1 project datasinda henuz tanimli degil (OQ-08)."
+    },
+    {
+      "plan_item_id": "QUA-L2-003",
+      "plan_item_name": "PPAP Dosyasi Hazirlama",
+      "condition": "IF Customer PPAP Required = Yes",
+      "source_field": "customer_ppap_required",
+      "evaluation": "AUTOMATIC_IF_AVAILABLE",
+      "source_level": "L1_OR_PROJECT_DATA",
+      "if_true": "Plan item active",
+      "if_false": "Plan item inactive",
+      "open_point": "Bu alan L1 project datasinda henuz tanimli degil (OQ-08)."
+    },
+    {
+      "plan_item_id": "QUA-L2-004",
+      "plan_item_name": "PPAP Musteri Sunumu & Onay Takibi",
+      "condition": "IF Customer PPAP Required = Yes",
+      "source_field": "customer_ppap_required",
+      "evaluation": "AUTOMATIC_IF_AVAILABLE",
+      "source_level": "L1_OR_PROJECT_DATA",
+      "if_true": "Plan item active",
+      "if_false": "Plan item inactive; QUA-L2-005 bypass kurali ile tetiklenir"
+    },
+    {
+      "plan_item_id": "QUA-L2-005",
+      "plan_item_name": "Seri Uretim Kalitesine Devir",
+      "condition": "ALWAYS ACTIVE",
+      "start_bypass_rule": "IF Customer PPAP Required = No THEN start on final verification complete",
+      "note": "Critical Review onerisi 5. PPAP koşullu devre disi kaldiginda predecessor zinciri kopmaz."
+    }
+  ],
+  "exceptions": [
+    {
+      "id": "EXC-Q-01",
+      "name": "Interim / Rejected PPAP",
+      "related_plan_items": ["QUA-L2-004", "QUA-L2-003"],
+      "expected_behavior": "Musteri interim onay verir veya PPAP'i reddederse; red/interim gerekcesi kaydedilir, gerekli ek dogrulama QUA-L2-003 uzerinden tekrarlanir ve dosya yeniden sunulur.",
+      "impact_on_plan": "QUA-L2-003 yeniden acilir; QUA-L2-004 due tarihi L1 PPAP_APPROVAL milestone'a gore yeniden degerlendirilir; QUA-L2-005 beklemede kalir.",
+      "task_followup_needed": true,
+      "task_followup_trigger": ["DELAYED", "BLOCKED"],
+      "notification_needed": true,
+      "notification_event": "PPAP_APPROVAL_OVERDUE"
+    },
+    {
+      "id": "EXC-Q-02",
+      "name": "Late incoming input",
+      "related_plan_items": ["QUA-L2-001", "QUA-L2-002"],
+      "expected_behavior": "R&D drawing release veya Process PFMEA/akis ciktisi beklenen tarihte gelmezse plan item 'Waiting for input' durumunda gorunur ve bagimlilik kaynagi ile birlikte raporlanir.",
+      "impact_on_plan": "Baslangic kayar; QUA-L2-003 ve sonrasindaki zincir L1 milestone'lara gore risk altinda isaretlenir.",
+      "task_followup_needed": false,
+      "task_followup_note": "Ilgili plan item modu USER_DECIDES; gerekirse kullanici task acar.",
+      "notification_needed": false,
+      "notification_note": "Critical Review sonrasi bildirim kapsamı QUA-L2-003 ve QUA-L2-004 ile sinirlandirildi; bu istisna weekly review 'Girdi bekleyenler' paneli uzerinden takip edilir."
+    }
+  ],
+  "not_selected_exceptions": [
+    "Design change",
+    "Carry-over urun",
+    "Existing tooling",
+    "Customer validation waived",
+    "Urgent project",
+    "Project on hold"
+  ],
+  "not_selected_note": "Bu istisnalar aday listede sunuldu, fonksiyon tarafindan Quality plani icin yonetilmesi gerekli gorulmedi."
+}
