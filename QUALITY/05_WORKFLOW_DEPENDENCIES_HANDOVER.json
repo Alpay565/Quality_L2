@@ -1,11 +1,11 @@
 {
   "function": "Quality",
-  "version": "1.0",
+  "version": "1.1",
   "internal_dependencies": [
     {
       "plan_item_id": "QUA-L2-001",
       "depends_on": [],
-      "start_condition": "L1 milestone DESIGN_PROTO_GATE reached"
+      "start_condition": "L1 milestone KICK_OFF reached"
     },
     {
       "plan_item_id": "QUA-L2-002",
@@ -14,8 +14,8 @@
     },
     {
       "plan_item_id": "QUA-L2-003",
-      "depends_on": ["QUA-L2-001", "QUA-L2-002"],
-      "start_condition": "QUA-L2-001 approved AND (QUA-L2-002 complete OR inactive)"
+      "depends_on": ["QUA-L2-001", "QUA-L2-002", "QUA-L2-006", "QUA-L2-007"],
+      "start_condition": "QUA-L2-001 approved AND (QUA-L2-002 complete OR inactive) AND QUA-L2-006 complete AND QUA-L2-007 complete"
     },
     {
       "plan_item_id": "QUA-L2-004",
@@ -27,6 +27,16 @@
       "depends_on": ["QUA-L2-004"],
       "start_condition": "PSW approved OR (Customer PPAP Required = No AND final verification complete)",
       "conditional_bypass": true
+    },
+    {
+      "plan_item_id": "QUA-L2-006",
+      "depends_on": [],
+      "start_condition": "L1 milestone DESIGN_PROTO_GATE reached"
+    },
+    {
+      "plan_item_id": "QUA-L2-007",
+      "depends_on": ["QUA-L2-006", "EXT-Q-01", "EXT-Q-05"],
+      "start_condition": "QUA-L2-006 complete AND PPAP sample parts received"
     }
   ],
   "external_dependencies": [
@@ -35,7 +45,7 @@
       "marker": "EXTERNAL_DEPENDENCY",
       "function": "R&D",
       "expected_output": "Released drawing + special characteristics + design freeze",
-      "needed_by": "QUA-L2-002 (start trigger), QUA-L2-001 (content input)",
+      "needed_by": "QUA-L2-002 (start trigger), QUA-L2-001 (content input), QUA-L2-007 (content input)",
       "status": "To Be Cross-Validated",
       "note": "Quality bu ciktiyi bekler; R&D adina karar verilmemistir."
     },
@@ -46,7 +56,7 @@
       "expected_output": "PFMEA + process flow diagram",
       "needed_by": "QUA-L2-001",
       "status": "To Be Cross-Validated",
-      "note": "PFMEA ve MSA / Gage R&R Process L2'sinde takip edilir. Quality katilimcidir, plan sahibi degildir."
+      "note": "PFMEA Process L2'sinde takip edilir. Quality katilimcidir, plan sahibi degildir. MSA / Gage R&R Quality L2 kapsamindadir (QUA-L2-006)."
     },
     {
       "id": "EXT-Q-03",
@@ -64,6 +74,15 @@
       "expected_output": "CSR / quality standards / requested PPAP level and date",
       "needed_by": "QUA-L2-001, QUA-L2-003",
       "status": "To Be Cross-Validated"
+    },
+    {
+      "id": "EXT-Q-05",
+      "marker": "EXTERNAL_DEPENDENCY",
+      "function": "Process",
+      "expected_output": "PPAP sample parts from production tooling",
+      "needed_by": "QUA-L2-007 (start trigger)",
+      "status": "To Be Cross-Validated",
+      "note": "QUA-L2-007 eklenirken tanimlandi. Process L2'de karsiligi dogrulanmali (OQ-13); Process adina karar verilmemistir."
     }
   ],
   "handovers": [
@@ -98,10 +117,10 @@
       "id": "HO-Q-04",
       "from_function": "Quality",
       "plan_item": "QUA-L2-001",
-      "output": "Approved Control Plan",
+      "output": "Approved proto Control Plan",
       "to_function": "Process / Production",
-      "acceptance_requirement": "Control plan released to production documentation",
-      "next_activity": "Process execution per control plan"
+      "acceptance_requirement": "Proto control plan released for prototype build",
+      "next_activity": "Prototype build per proto control plan; production control plan is handed over via HO-Q-03"
     }
   ],
   "note": "Fonksiyon yeni handover status sistemi tanimlamamistir. Merkezi portal bu bilgilerden gerekli workflow'u olusturur."

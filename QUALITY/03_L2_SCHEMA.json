@@ -3,7 +3,7 @@
   "plan_level": "L2",
   "l3_enabled": false,
   "l3_reason": "L3 yalnizca R&D fonksiyonu icin kullanilabilir.",
-  "version": "1.0",
+  "version": "1.1",
   "status": "DRAFT",
   "inherited_from_l1": [
     "project_id",
@@ -36,12 +36,12 @@
     {
       "plan_item_id": "QUA-L2-001",
       "seq": 1,
-      "plan_item_name": "Control Plan (Proto / Pre-launch / Production)",
-      "purpose": "Urun ve proses kontrol gerekliliklerinin faz bazinda tanimlanmasi ve onaylanmasi.",
+      "plan_item_name": "Control Plan (Proto)",
+      "purpose": "Proto control plan'in olusturulmasi ve onaylanmasi. Pre-launch / production control plan revizyonlari QUA-L2-003 kapsaminda PPAP elemani olarak tamamlanir.",
       "responsible_role": "Quality Engineer",
       "start_rule": {
         "type": "L1_MILESTONE",
-        "reference": "DESIGN_PROTO_GATE",
+        "reference": "KICK_OFF",
         "manual_date_entry": false
       },
       "input": [
@@ -57,7 +57,7 @@
         }
       ],
       "output": {
-        "name": "Approved Control Plan",
+        "name": "Approved proto Control Plan",
         "measurable": true,
         "version_controlled": true,
         "approval_required": true
@@ -124,22 +124,27 @@
       "plan_item_id": "QUA-L2-003",
       "seq": 3,
       "plan_item_name": "PPAP Dosyasi Hazirlama",
-      "purpose": "PPAP elemanlarinin toplanmasi ve musteriye sunulabilir tek dosya olarak derlenmesi.",
+      "purpose": "PPAP elemanlarinin toplanmasi ve musteriye sunulabilir tek dosya olarak derlenmesi. Pre-launch / production control plan revizyonlari bu satirda PPAP elemani olarak tamamlanir.",
       "responsible_role": "Quality Engineer",
       "start_rule": {
         "type": "PREDECESSOR_COMPLETE",
-        "expression": "QUA-L2-001 = Approved AND (QUA-L2-002 = Complete OR QUA-L2-002 = Inactive)",
+        "expression": "QUA-L2-001 = Approved AND (QUA-L2-002 = Complete OR QUA-L2-002 = Inactive) AND QUA-L2-006 = Complete AND QUA-L2-007 = Complete",
         "manual_date_entry": false
       },
       "input": [
         {
-          "name": "Approved Control Plan",
+          "name": "Approved proto Control Plan",
           "source": "QUA-L2-001",
           "type": "INTERNAL"
         },
         {
-          "name": "Measurement / dimensional results",
-          "source": "QUA-L2-002",
+          "name": "Approved MSA / Gage R&R report",
+          "source": "QUA-L2-006",
+          "type": "INTERNAL"
+        },
+        {
+          "name": "Dimensional / layout inspection report",
+          "source": "QUA-L2-007",
           "type": "INTERNAL"
         },
         {
@@ -165,7 +170,7 @@
         "offset_days": 0,
         "manual_date_entry": false
       },
-      "predecessor": ["QUA-L2-001", "QUA-L2-002"],
+      "predecessor": ["QUA-L2-001", "QUA-L2-002", "QUA-L2-006", "QUA-L2-007"],
       "successor": ["QUA-L2-004"],
       "conditional": true,
       "condition": {
@@ -245,7 +250,7 @@
         },
         {
           "name": "Production control plan",
-          "source": "QUA-L2-001",
+          "source": "QUA-L2-003",
           "type": "INTERNAL"
         }
       ],
@@ -267,11 +272,104 @@
       "task_followup_mode": "USER_DECIDES",
       "standard_workload_reference": null,
       "standard_workload_status": "WORKLOAD_STANDARD_GAP"
+    },
+    {
+      "plan_item_id": "QUA-L2-006",
+      "seq": 6,
+      "plan_item_name": "MSA / Gage R&R",
+      "purpose": "Kullanilacak olcum sistemlerinin (yeni veya mevcut gage) yeterliliginin MSA / Gage R&R calismasi ile dogrulanmasi. Gage'in yeni olup olmamasindan bagimsiz olarak her projede yapilir.",
+      "scope_decision": "Merkezi karar 2026-09-24 (OQ-02 kapanisi): MSA / Gage R&R Quality L2 kapsamindadir, PFMEA Process L2'de kalir.",
+      "responsible_role": "Quality Engineer (Metrology)",
+      "start_rule": {
+        "type": "L1_MILESTONE",
+        "reference": "DESIGN_PROTO_GATE",
+        "note": "Fonksiyon karari: baslangic L1 milestone'a baglidir, QUA-L2-002'ye baglanmaz. Proto control plan (QUA-L2-001) bu milestone'da tamamlanir.",
+        "manual_date_entry": false
+      },
+      "input": [
+        {
+          "name": "Proto Control Plan (measured characteristics and methods)",
+          "source": "QUA-L2-001",
+          "type": "INTERNAL"
+        },
+        {
+          "name": "Measurement equipment to be used (new gage via QUA-L2-002 or existing gage)",
+          "source": "QUALITY",
+          "type": "INTERNAL"
+        }
+      ],
+      "output": {
+        "name": "Approved MSA / Gage R&R report",
+        "measurable": true,
+        "version_controlled": true,
+        "approval_required": true
+      },
+      "due_rule": {
+        "type": "L1_MILESTONE",
+        "reference": "PPAP_SUBMISSION",
+        "offset_days": 0,
+        "note": "QUA-L2-003 ile ayni milestone'a bagli; PPAP dosyasina sure kalmasi icin negatif offset gerekir (OQ-11).",
+        "manual_date_entry": false
+      },
+      "predecessor": [],
+      "successor": ["QUA-L2-007", "QUA-L2-003"],
+      "conditional": false,
+      "task_followup_mode": "USER_DECIDES",
+      "standard_workload_reference": null,
+      "standard_workload_status": "WORKLOAD_STANDARD_GAP"
+    },
+    {
+      "plan_item_id": "QUA-L2-007",
+      "seq": 7,
+      "plan_item_name": "Dimensional / Layout Inspection Report",
+      "purpose": "PPAP numunelerinin teknik resme gore olculmesi ve boyutsal uygunlugun raporlanmasi. QUA-L2-003'un PPAP dosyasi icin bekledigi olcum sonucunu uretir.",
+      "responsible_role": "Quality Engineer (Metrology)",
+      "start_rule": {
+        "type": "PREDECESSOR_COMPLETE",
+        "expression": "QUA-L2-006 = Complete AND PPAP sample parts received",
+        "manual_date_entry": false
+      },
+      "input": [
+        {
+          "name": "Approved MSA / Gage R&R report (validated measurement system)",
+          "source": "QUA-L2-006",
+          "type": "INTERNAL"
+        },
+        {
+          "name": "Released drawing & special characteristics",
+          "source": "RND",
+          "type": "EXTERNAL_DEPENDENCY"
+        },
+        {
+          "name": "PPAP sample parts (production tooling)",
+          "source": "PROCESS",
+          "type": "EXTERNAL_DEPENDENCY"
+        }
+      ],
+      "output": {
+        "name": "Dimensional / layout inspection report",
+        "measurable": true,
+        "version_controlled": true,
+        "approval_required": true
+      },
+      "due_rule": {
+        "type": "L1_MILESTONE",
+        "reference": "PPAP_SUBMISSION",
+        "offset_days": 0,
+        "note": "QUA-L2-003 ile ayni milestone'a bagli; PPAP dosyasina sure kalmasi icin negatif offset gerekir (OQ-11).",
+        "manual_date_entry": false
+      },
+      "predecessor": ["QUA-L2-006"],
+      "successor": ["QUA-L2-003"],
+      "conditional": false,
+      "task_followup_mode": "USER_DECIDES",
+      "standard_workload_reference": null,
+      "standard_workload_status": "WORKLOAD_STANDARD_GAP"
     }
   ],
   "out_of_scope": [
     {
-      "topic": "PFMEA / MSA / Gage R&R",
+      "topic": "PFMEA",
       "owned_by": "Process",
       "quality_role": "CONTRIBUTOR",
       "marker": "EXTERNAL_DEPENDENCY"

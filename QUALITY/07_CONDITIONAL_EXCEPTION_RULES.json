@@ -1,6 +1,6 @@
 {
   "function": "Quality",
-  "version": "1.0",
+  "version": "1.1",
   "conditional_rules": [
     {
       "plan_item_id": "QUA-L2-002",
@@ -57,8 +57,8 @@
     {
       "id": "EXC-Q-02",
       "name": "Late incoming input",
-      "related_plan_items": ["QUA-L2-001", "QUA-L2-002"],
-      "expected_behavior": "R&D drawing release veya Process PFMEA/akis ciktisi beklenen tarihte gelmezse plan item 'Waiting for input' durumunda gorunur ve bagimlilik kaynagi ile birlikte raporlanir.",
+      "related_plan_items": ["QUA-L2-001", "QUA-L2-002", "QUA-L2-007"],
+      "expected_behavior": "R&D drawing release, Process PFMEA/akis ciktisi veya PPAP numune parcalari beklenen tarihte gelmezse plan item 'Waiting for input' durumunda gorunur ve bagimlilik kaynagi ile birlikte raporlanir.",
       "impact_on_plan": "Baslangic kayar; QUA-L2-003 ve sonrasindaki zincir L1 milestone'lara gore risk altinda isaretlenir.",
       "task_followup_needed": false,
       "task_followup_note": "Ilgili plan item modu USER_DECIDES; gerekirse kullanici task acar.",

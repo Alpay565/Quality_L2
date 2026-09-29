@@ -1,10 +1,25 @@
 {
   "function": "Quality",
-  "version": "1.0",
+  "version": "1.1",
   "documents": [
     {
       "document_type": "Control Plan",
       "related_plan_item": "QUA-L2-001",
+      "required_as": "OUTPUT",
+      "approval_required": true,
+      "version_controlled": true,
+      "note": "Proto versiyonu QUA-L2-001'de; pre-launch / production revizyonlari QUA-L2-003 kapsaminda ayni dokumanin yeni versiyonu olarak cikar."
+    },
+    {
+      "document_type": "MSA / Gage R&R Report",
+      "related_plan_item": "QUA-L2-006",
+      "required_as": "OUTPUT",
+      "approval_required": true,
+      "version_controlled": true
+    },
+    {
+      "document_type": "Dimensional / Layout Inspection Report",
+      "related_plan_item": "QUA-L2-007",
       "required_as": "OUTPUT",
       "approval_required": true,
       "version_controlled": true
