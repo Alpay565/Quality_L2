@@ -1,7 +1,7 @@
 # 13 – DESIGN REVIEW
 
 **Function:** Quality
-**Version:** 1.0
+**Version:** 1.1
 **Karar:** Seçenek **B – Tüm öneriler uygulandı**
 
 ---
@@ -91,3 +91,29 @@ Aşağıdakiler tasarım kararı değil, **veri/kapsam eksikliğidir**; `12_OPEN
 
 R&D değil → L3 kontrolleri uygulanmaz.
 ```
+
+---
+
+## F. Revizyon 1.1 (2026-09-29) – Merkezi talep sonrası
+
+**Tetikleyici:** OQ-02'nin merkezi kararla kapanması (2026-09-24): PFMEA → Process L2,
+MSA / Gage R&R → Quality L2. Bölüm A.1 ve D.2'deki "PFMEA/MSA Process'te" ifadesi MSA için
+geçerliliğini yitirmiştir; PFMEA için geçerlidir.
+
+| # | Değişiklik | Karar veren |
+|---|---|---|
+| 1 | QUA-L2-006 MSA / Gage R&R eklendi – koşulsuz, `DESIGN_PROTO_GATE` ile başlar, predecessor yok | Koşulsuzluk: merkez · Başlangıç kuralı: fonksiyon |
+| 2 | QUA-L2-007 Dimensional / Layout Inspection Report eklendi – 006 sonrası, 003'ü besler | Fonksiyon |
+| 3 | QUA-L2-003'ün "ölçüm sonuçları ← QUA-L2-002" girdisi düzeltildi (002 plan üretir, sonuç değil) | Merkez tespiti (D.2), fonksiyon çözümü (#2) |
+| 4 | QUA-L2-001 start = due hatası düzeltildi: start Kick-off'a alındı, satır yalnız proto CP'yi kapsar | Fonksiyon |
+| 5 | SWL faz eşlemesi boş bırakıldı; merkezde yapılacak | Fonksiyon |
+
+**Kabul edilen riskler (fonksiyon kararları):**
+
+- **MSA ↔ gage bağı yok.** QUA-L2-006, QUA-L2-002'yi beklemez. Yeni gage gereken projede MSA
+  planda başlamış görünür ama gage gelmeden fiilen yapılamaz; bu bekleme planda görünmez.
+  Alternatif (fallback predecessor: `001 + (002 tamam veya pasif)`) önerildi, seçilmedi.
+- **Production CP ayrı görünmez.** Pre-launch / production CP, QUA-L2-003 içinde alt detaydır
+  (OQ-12).
+- **Zincir süreleri tanımsız.** 006, 007 ve 003 aynı milestone'a bağlıdır (OQ-11).
+

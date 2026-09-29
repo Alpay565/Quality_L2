@@ -1,7 +1,7 @@
 # 10 – WEEKLY REVIEW REQUIREMENTS
 
 **Function:** Quality
-**Version:** 1.0
+**Version:** 1.1
 
 ---
 
@@ -11,7 +11,7 @@
 |---|---|---|---|
 | 1 | Open + Overdue plan items | Bu hafta açık olan ve süresi geçmiş Quality plan item'ları | L2 plan + L1 milestone due |
 | 2 | PPAP onay bekleyenler | Müşteriye sunulmuş, PSW onayı bekleyen dosyalar + bekleme süresi (gün) | QUA-L2-004 |
-| 3 | Girdi bekleyenler (Waiting for input) | Başka fonksiyondan girdi beklediği için başlayamayan item'lar + bekleyen kaynak fonksiyon | `EXT-Q-01` … `EXT-Q-04` |
+| 3 | Girdi bekleyenler (Waiting for input) | Başka fonksiyondan girdi beklediği için başlayamayan item'lar + bekleyen kaynak fonksiyon | `EXT-Q-01` … `EXT-Q-05` |
 | 4 | Bağlı Task Follow-Up aksiyonları | Quality plan item'larına bağlanmış açık Follow-Up Task'lar | Mevcut Task Follow-Up katmanı |
 
 ## 2. Panel Detayları

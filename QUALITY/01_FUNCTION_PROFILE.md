@@ -2,7 +2,7 @@
 
 **Function:** Quality
 **Planning Level:** L2 only (L3 kullanılmaz – L3 yalnızca R&D'ye açıktır)
-**Version:** 1.0
+**Version:** 1.1
 **Status:** Draft
 
 ---
@@ -37,10 +37,12 @@ Planlama  →  Validation  →  SOP
 | 1 | APQP / PPAP yönetimi | PPAP dosyasının derlenmesi ve müşteri onayının alınması |
 | 2 | Control Plan | Proto / Pre-launch / Production kontrol planları |
 | 3 | Ölçüm ekipmanı & kalibrasyon planlama | Gage/fikstür planlama ve kalibrasyon durumu |
+| 4 | MSA / Gage R&R | Kullanılacak ölçüm sistemlerinin yeterlilik analizi (yeni veya mevcut gage) – QUA-L2-006 |
+| 5 | Dimensional / layout inspection | PPAP numunelerinin boyutsal ölçüm raporu – QUA-L2-007 |
 
 **Kapsam dışı (bilinçli karar):**
 
-- **PFMEA ve MSA / Gage R&R** → Process L2'sinde takip edilir. Quality katılımcıdır, plan sahibi değildir.
+- **PFMEA** → Process L2'sinde takip edilir. Quality katılımcıdır, plan sahibi değildir.
 - **Supplier quality** (tedarikçi PPAP'ı, giriş kalite kriteri, tedarikçi audit) → Purchasing L2'sinde takip edilir.
 
 Bu iki alan Quality L2'de plan item olarak açılmaz; `EXTERNAL_DEPENDENCY` olarak kaydedilir.
@@ -52,6 +54,7 @@ Bu iki alan Quality L2'de plan item olarak açılmaz; `EXTERNAL_DEPENDENCY` olar
 | Müşteri | CSR / müşteri kalite standartları, talep edilen PPAP seviyesi ve tarihi | Ana girdi |
 | R&D | Released drawing, özel karakteristikler, design freeze | `EXTERNAL_DEPENDENCY` |
 | Process | PFMEA, proses akış şeması | `EXTERNAL_DEPENDENCY` |
+| Process | PPAP numune parçaları (production tooling) | `EXTERNAL_DEPENDENCY` (`EXT-Q-05`) |
 | Purchasing | Tedarikçi PPAP durumu | `EXTERNAL_DEPENDENCY` |
 
 > R&D ve Process girdileri, discovery sırasında ana girdi olarak seçilmemişti; ancak start rule'lardan
@@ -60,9 +63,11 @@ Bu iki alan Quality L2'de plan item olarak açılmaz; `EXTERNAL_DEPENDENCY` olar
 ## 6. Main Outputs
 
 ```text
-Onaylı Control Plan
+Onaylı proto Control Plan
 Gage / ölçüm ekipmanı planı
-Derlenmiş PPAP dosyası
+MSA / Gage R&R raporu
+Boyutsal (dimensional / layout) ölçüm raporu
+Derlenmiş PPAP dosyası (pre-launch / production Control Plan dahil)
 Müşteri PSW onayı
 Seri üretim kalitesine devir kaydı
 ```

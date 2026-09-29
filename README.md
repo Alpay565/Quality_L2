@@ -18,13 +18,15 @@ Quality **L2-only** bir fonksiyondur; L3 alt plan yalnızca R&D'ye açık olduğ
 
 | ID | Plan Item | Koşullu | Task Follow-Up |
 |---|---|---|---|
-| QUA-L2-001 | Control Plan (Proto / Pre-launch / Production) | Hayır | USER_DECIDES |
+| QUA-L2-001 | Control Plan (Proto) | Hayır | USER_DECIDES |
 | QUA-L2-002 | Gage / Ölçüm Ekipmanı Planlama | Evet | USER_DECIDES |
 | QUA-L2-003 | PPAP Dosyası Hazırlama | Evet | USER_DECIDES |
 | QUA-L2-004 | PPAP Müşteri Sunumu & Onay Takibi | Evet | EXCEPTION_ONLY |
 | QUA-L2-005 | Seri Üretim Kalitesine Devir | Hayır | USER_DECIDES |
+| QUA-L2-006 | MSA / Gage R&R | Hayır | USER_DECIDES |
+| QUA-L2-007 | Dimensional / Layout Inspection Report | Hayır | USER_DECIDES |
 
-**Kapsam dışı (bilinçli):** PFMEA / MSA → Process L2 · Supplier quality → Purchasing L2
+**Kapsam dışı (bilinçli):** PFMEA → Process L2 · Supplier quality → Purchasing L2
 
 **Durum:** Draft — `QUALITY/14_FUNCTION_SIGNOFF.md` ve `QUALITY/12_OPEN_QUESTIONS.md` içindeki
-5 blocking açık kalem (özellikle Standard Workload eşleştirmesi) merkezi entegrasyon öncesi çözülmelidir.
+4 blocking açık kalem (özellikle Standard Workload eşleştirmesi) merkezi entegrasyon öncesi çözülmelidir.

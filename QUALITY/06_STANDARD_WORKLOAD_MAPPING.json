@@ -1,13 +1,14 @@
 {
   "function": "Quality",
-  "version": "1.0",
+  "version": "1.1",
   "note": "Bu dosyada difficulty ve saat bulunmaz. Project Difficulty L1 Project Plan'dan gelir; Planned Workload merkezi Standard Workload Engine tarafindan hesaplanir.",
   "mapping_method": "CENTRAL",
   "mapping_method_reason": "Standard Workload dosyasi/verisi bu calisma sirasinda erisilebilir degildi; secenek listesi kullaniciya gosterilemedi. Fonksiyon saat tahmini uretmemis, tum satirlar GAP olarak isaretlenmistir.",
+  "swl_phase_mapping_note": "Merkez, SWL Calculations dosyasindaki faz bazli saatleri (NPA-Award / Kick Off-TOGO / TOGO-SOPR / SOP-PRCL) satirlara baglamak icin her satirin fazini istedi. Fonksiyon karari (2026-09-29): faz alanlari bos birakildi; eslestirme merkezde yapilacak. Satirlar bu haliyle saatsiz gorunur.",
   "mappings": [
     {
       "plan_item_id": "QUA-L2-001",
-      "plan_item_name": "Control Plan (Proto / Pre-launch / Production)",
+      "plan_item_name": "Control Plan (Proto)",
       "standard_workload_reference": null,
       "mapping_status": "WORKLOAD_STANDARD_GAP",
       "reason": "No matching Standard Workload activity identified",
@@ -44,11 +45,27 @@
       "mapping_status": "WORKLOAD_STANDARD_GAP",
       "reason": "No matching Standard Workload activity identified",
       "action": "Review centrally before integration"
+    },
+    {
+      "plan_item_id": "QUA-L2-006",
+      "plan_item_name": "MSA / Gage R&R",
+      "standard_workload_reference": null,
+      "mapping_status": "WORKLOAD_STANDARD_GAP",
+      "reason": "No matching Standard Workload activity identified",
+      "action": "Review centrally before integration"
+    },
+    {
+      "plan_item_id": "QUA-L2-007",
+      "plan_item_name": "Dimensional / Layout Inspection Report",
+      "standard_workload_reference": null,
+      "mapping_status": "WORKLOAD_STANDARD_GAP",
+      "reason": "No matching Standard Workload activity identified",
+      "action": "Review centrally before integration"
     }
   ],
   "gap_summary": {
-    "total_plan_items": 5,
+    "total_plan_items": 7,
     "confirmed": 0,
-    "gap": 5
+    "gap": 7
   }
 }

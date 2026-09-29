@@ -1,7 +1,7 @@
 # 11 – BUSINESS RULES
 
 **Function:** Quality
-**Version:** 1.0
+**Version:** 1.1
 
 ---
 
@@ -34,9 +34,10 @@ Yalnızca hangi durumda Task Follow-Up'a aksiyon taşınacağını belirler:
 L2 plan satırı otomatik olarak Follow-Up Task'a dönüşmez. Normal ilerleyen bir plan item için
 ayrı takip kaydı açılmaz; yalnızca gecikme/blokaj/istisna durumunda (BR-Q-04 kuralına göre) açılır.
 
-## BR-Q-06 – Kapsam sınırı: PFMEA / MSA
-PFMEA ve MSA / Gage R&R **Process L2**'sinde takip edilir. Quality katılımcıdır, plan sahibi değildir.
-Quality L2'de bu başlıklar için plan item açılmaz; `EXT-Q-02` olarak kaydedilir.
+## BR-Q-06 – Kapsam sınırı: PFMEA
+PFMEA **Process L2**'sinde takip edilir. Quality katılımcıdır, plan sahibi değildir.
+Quality L2'de PFMEA için plan item açılmaz; `EXT-Q-02` olarak kaydedilir.
+MSA / Gage R&R ise Quality L2 kapsamındadır (QUA-L2-006) – merkezi karar 2026-09-24.
 
 ## BR-Q-07 – Kapsam sınırı: Supplier quality
 Tedarikçi PPAP'ı, giriş kalite kriterleri ve tedarikçi audit **Purchasing L2**'sinde takip edilir.
@@ -64,9 +65,20 @@ Drive/klasör mimarisi merkezi sistem tarafından yönetilir.
 ## BR-Q-12 – Standard Workload GAP
 Standard Workload eşleşmesi bulunamayan plan item için Quality saat tahmini üretmez;
 `WORKLOAD_STANDARD_GAP` işareti konur ve merkezi entegrasyon öncesi gözden geçirilir.
-Bu çalışmada 5 plan item'ın tamamı GAP durumundadır.
+Bu çalışmada 7 plan item'ın tamamı GAP durumundadır. SWL Calculations faz eşlemesi de
+fonksiyon kararıyla boş bırakılmıştır; eşleştirme merkezde yapılır (2026-09-29).
 
 ## BR-Q-13 – Zero manual entry
 Aşağıdaki alanlar Quality kullanıcısından tekrar istenmez; L1'den gelir:
 `Project ID, Project Code, Project Name, Customer, Segment, Project Type,
 Project Difficulty, PM, Created By, Created At, Site`
+
+## BR-Q-14 – Control Plan kapsamı
+QUA-L2-001 yalnızca **proto** control plan'ı kapsar (Kick-off → Design/Proto gate).
+Pre-launch / production control plan revizyonları QUA-L2-003 içinde PPAP elemanı olarak
+tamamlanır ve QUA-L2-005 ile seri üretime devredilir.
+
+## BR-Q-15 – MSA / Gage R&R her projede
+QUA-L2-006 koşulsuzdur. Gage'in yeni olup olmamasından bağımsız olarak, kullanılacak
+ölçüm sisteminin yeterliliği her projede doğrulanır. QUA-L2-003 (PPAP dosyası) MSA ve
+boyutsal ölçüm raporu (QUA-L2-007) tamamlanmadan başlayamaz.

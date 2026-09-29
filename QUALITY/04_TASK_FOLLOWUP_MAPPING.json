@@ -1,6 +1,6 @@
 {
   "function": "Quality",
-  "version": "1.0",
+  "version": "1.1",
   "note": "Bu dosya mevcut Task Follow-Up status modelini, kart yapisini, global filtrelerini veya lifecycle'ini DEGISTIRMEZ. Yalnizca Quality L2 plan item'larindan hangi durumlarda Task Follow-Up'a aksiyon tasinacagini tanimlar.",
   "allowed_modes": [
     "NONE",
@@ -11,7 +11,7 @@
   "mappings": [
     {
       "plan_item_id": "QUA-L2-001",
-      "plan_item_name": "Control Plan (Proto / Pre-launch / Production)",
+      "plan_item_name": "Control Plan (Proto)",
       "mode": "USER_DECIDES",
       "recommended_trigger": [],
       "rationale": "Normal ilerledigi surece ayri takip gerektirmez; kullanici gerektiginde task acar."
@@ -49,6 +49,20 @@
       "mode": "USER_DECIDES",
       "recommended_trigger": [],
       "rationale": "Devir tek seferlik ve L1 SOP milestone'a bagli; ayri takip gerektirmez."
+    },
+    {
+      "plan_item_id": "QUA-L2-006",
+      "plan_item_name": "MSA / Gage R&R",
+      "mode": "USER_DECIDES",
+      "recommended_trigger": [],
+      "rationale": "Ic olcum calismasi; yetersiz olcum sistemi cikarsa kullanici task acar."
+    },
+    {
+      "plan_item_id": "QUA-L2-007",
+      "plan_item_name": "Dimensional / Layout Inspection Report",
+      "mode": "USER_DECIDES",
+      "recommended_trigger": [],
+      "rationale": "Numune gecikmesi weekly review 'Girdi bekleyenler' panelinde gorunur; gerekirse kullanici task acar."
     }
   ],
   "plan_to_task_link_contract": {
